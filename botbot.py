@@ -1,14 +1,10 @@
-from dotenv import load_dotenv
-import os
 import discord
 import aiohttp
 from datetime import datetime
+import os
 
-load_dotenv()
-
+TOKEN = os.getenv('DISCORD_TOKEN')
 WEBHOOK_URL = os.getenv('WEBHOOK_URL')
-
-TOKEN = os.getenv('DISCORD_TOKEN').strip()
 
 
 SERVER_ID = 1207148560970293328
@@ -71,4 +67,3 @@ class MyClient(discord.Client):
 
 client = MyClient()
 client.run(TOKEN)
-
