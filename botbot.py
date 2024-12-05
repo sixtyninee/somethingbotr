@@ -5,7 +5,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 
 load_dotenv()
-DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
+DISCORD_BOT_TOKEN = os.getenv('DISCORD_BOT_TOKEN')
 WEBHOOK_URL = os.getenv('WEBHOOK_URL')
 
 
@@ -68,4 +68,4 @@ class MyClient(discord.Client):
                             print(f"Failed to send attachment: {response.status}")
 
 client = MyClient()
-client.run(DISCORD_TOKEN)
+client.run(DISCORD_BOT_TOKEN)
