@@ -1,6 +1,7 @@
 import os
 import discord
 import aiohttp
+from aiohttp import web
 from datetime import datetime
 from dotenv import load_dotenv
 
@@ -68,4 +69,25 @@ class MyClient(discord.Client):
                             print(f"Failed to send attachment: {response.status}")
 
 client = MyClient()
-client.run(DISCORD_BOT_TOKEN)
+
+async def handle(request):
+    return web.Response(text="Bot is running")
+
+async def start_web_server():
+    app = web.Application()
+    app.router.add_get("/", handle)
+    port = int(os.getenv("PORT", 8080))
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, "0.0.0.0", port)
+    await site.start()
+    print(f"Web server running on port {port}")
+
+# Run both the bot and web server
+async def main():
+    await start_web_server()
+    await client.start(DISCORD_BOT_TOKEN)
+
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(main())
