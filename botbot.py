@@ -8,7 +8,7 @@ load_dotenv()
 
 WEBHOOK_URL = os.getenv('WEBHOOK_URL')
 
-TOKEN = os.getenv('DISCORD_TOKEN')
+TOKEN = os.getenv('DISCORD_TOKEN').strip()
 
 
 SERVER_ID = 1207148560970293328
